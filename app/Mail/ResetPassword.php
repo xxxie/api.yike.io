@@ -9,7 +9,8 @@ use Illuminate\Queue\SerializesModels;
 
 class ResetPassword extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public $email;
 
@@ -37,7 +38,7 @@ class ResetPassword extends Mailable implements ShouldQueue
             'email' => $this->email,
         ];
 
-        return config('app.site_url').'user/reset-password?'.http_build_query($params);
+        return str_finish(config('app.site_url'), '/').'user/reset-password?'.http_build_query($params);
     }
 
     /**

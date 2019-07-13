@@ -78,14 +78,15 @@ class EsEngine extends ElasticsearchEngine
     /**
      * Map the given results to instances of the given model.
      *
+     * @param \Laravel\Scout\Builder              $builder
      * @param mixed                               $results
      * @param \Illuminate\Database\Eloquent\Model $model
      *
      * @return Collection
      */
-    public function map($results, $model)
+    public function map(Builder $builder, $results, $model)
     {
-        if ($results['hits']['total'] === 0) {
+        if (0 === $results['hits']['total']) {
             return Collection::make();
         }
 
